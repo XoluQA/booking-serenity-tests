@@ -1,0 +1,90 @@
+buildscript {
+
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    ext {
+        serenityVersion = '4.0.12'
+        cucumberVersion = '7.11.0'
+        JunitVersion = '5.9.3'
+        appiumVersion = '8.3.0'
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:$rootProject.ext.serenityVersion")
+        classpath("net.serenity-bdd:serenity-single-page-report:$rootProject.ext.serenityVersion")
+
+    }
+}
+plugins {
+    id 'java'
+    id 'org.gradle.test-retry' version '1.5.6'
+}
+repositories {
+    mavenCentral()
+}
+group = 'Certiprof'
+version = '1.0-SNAPSHOT'
+
+apply plugin: 'application'
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: "jacoco"
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.serenity-gradle-plugin'
+
+
+
+sourceCompatibility = 11
+
+serenity {
+    reports = ["single-page-html"]
+}
+
+dependencies {
+
+    implementation "org.junit.jupiter:junit-jupiter-engine:$rootProject.ext.JunitVersion"
+
+    implementation "io.cucumber:cucumber-junit-platform-engine:$rootProject.ext.cucumberVersion"
+    implementation "io.cucumber:cucumber-java:$rootProject.ext.cucumberVersion"
+
+    implementation 'io.appium:java-client:8.6.0'
+
+    implementation "net.serenity-bdd:serenity-core:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-junit:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-cucumber:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-screenplay:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-screenplay-webdriver:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-rest-assured:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-screenplay-rest:$rootProject.ext.serenityVersion"
+    implementation 'org.apache.logging.log4j:log4j-core:2.22.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.13.0'
+    implementation "io.github.bonigarcia:webdrivermanager:5.9.2"
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.assertj:assertj-core:3.23.1'
+    testImplementation 'org.slf4j:slf4j-simple:2.0.3'
+    implementation 'net.sf.jt400:jt400:11.0'
+    implementation 'org.jvnet.com4j:com4j:20110320'
+    implementation group: 'net.sf.jt400', name: 'jt400', version: '9.7'
+    implementation 'org.apache.poi:poi-ooxml:5.2.3'
+    //implementation 'com.epam.healenium:hlm-selenium:3.3.5'
+
+}
+tasks.withType(Test).configureEach {
+
+    boolean isCiServer = System.getenv().containsKey("CI")
+    test {
+        retry {
+            maxRetries = 0
+            maxFailures = 100
+            failOnPassedAfterRetry = true
+        }
+    }
+
+    gradle.startParameter.continueOnFailure = true
+    test.finalizedBy(aggregate)
+}
+
+tasks.withType(JavaCompile){ options.encoding = 'UTF-8' }
