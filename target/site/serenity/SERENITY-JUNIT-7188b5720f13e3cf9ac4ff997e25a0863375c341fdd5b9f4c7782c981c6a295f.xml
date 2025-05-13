@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="1" failures="0" name="Hotel reservation on Booking with login" skipped="0" tests="1" time="0.13" timestamp="2025-05-08 08:13:40"><testcase name="Log in and reserve a hotel with filters"><error message="No stage available - it looks like you haven't called the setTheStage() method before calling this one." type="net.serenitybdd.screenplay.actors.NoStageException">No stage available - it looks like you haven't called the setTheStage() method before calling this one.</error><system-err>No stage available - it looks like you haven't called the setTheStage() method before calling this one.&#13;
-com.booking.stepsdefinitions.BookingStepsDefinition.theUserOpensTheBookingWebsite(BookingStepsDefinition.java:21)&#13;
-✽.the user opens the Booking website(file:///C:/Users/ingjo/IdeaProjects/CasoDeEstudioBooking/src/test/resources/features/booking.feature:4)&#13;
-</system-err></testcase></testsuite>
