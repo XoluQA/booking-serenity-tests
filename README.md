@@ -27,15 +27,14 @@ Este proyecto automatiza casos de prueba funcionales sobre el sitio web [Booking
 
 ## 📁 Estructura del proyecto
 
-📁 src
-└── 📁 main
-└── 📁 java
-└── 📦 lógica de negocio, tareas y page objects
-└── 📁 test
-└── 📁 java
-├── 🥒 definiciones de pasos (Step Definitions)
-└── 🧪 runners de pruebas
-
+📁 src  
+├── 📁 main  
+│   └── 📁 java  
+│       └── 📦 lógica de negocio, tareas, preguntas y page objects  
+└── 📁 test  
+    └── 📁 java  
+        ├── 🥒 definiciones de pasos (Step Definitions)  
+        └── 🧪 runners de pruebas  
 
 ---
 
