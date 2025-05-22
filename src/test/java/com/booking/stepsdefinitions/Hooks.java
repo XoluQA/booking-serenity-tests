@@ -1,5 +1,6 @@
 package com.booking.stepsdefinitions;
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import net.serenitybdd.annotations.Managed;
@@ -21,4 +22,9 @@ public class Hooks {
         OnStage.theActorInTheSpotlight().can(BrowseTheWeb.with(hisDriver));
     }
 
+    @After
+    public void setUpFinish()
+    {
+        hisDriver.close();
+    }
 }

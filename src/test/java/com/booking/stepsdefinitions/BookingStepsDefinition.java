@@ -1,25 +1,28 @@
 package com.booking.stepsdefinitions;
+import com.booking.questions.ReserveButtonIsVisible;
 import com.booking.tasks.BookingTask;
-import com.booking.tasks.LoginTask;
+//import com.booking.tasks.LoginTask;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.model.environment.EnvironmentSpecificConfiguration;
+import net.serenitybdd.screenplay.GivenWhenThen;
 import net.serenitybdd.screenplay.actions.Open;
 import net.serenitybdd.screenplay.actors.OnStage;
+import net.thucydides.model.environment.SystemEnvironmentVariables;
 import net.thucydides.model.util.EnvironmentVariables;
+import org.hamcrest.Matchers;
 
 
 public class BookingStepsDefinition {
 
-    private EnvironmentVariables environmentVariables;
+    private final EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
 
     @Given("the user opens the Booking website")
     public void theUserOpensTheBookingWebsite() {
-        String webServiceEndpoint = EnvironmentSpecificConfiguration.from(environmentVariables)
+        String URL = EnvironmentSpecificConfiguration.from(environmentVariables)
                 .getProperty("environments.default.webdriver.base.url");
 
-        String URL = webServiceEndpoint.toString();
         OnStage.theActorInTheSpotlight().wasAbleTo(Open.url(URL));
     }
     @When("the user logs in with valid credentials")
@@ -34,6 +37,7 @@ public class BookingStepsDefinition {
     }
     @Then("the user selects the cheapest hotel and saves its information")
     public void theUserSelectsTheCheapestHotelAndSavesItsInformation() {
+        OnStage.theActorInTheSpotlight().should(GivenWhenThen.seeThat(ReserveButtonIsVisible.isDisplayed(), Matchers.is(true)));
 
     }
 }

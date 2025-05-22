@@ -1,6 +1,7 @@
 package com.booking.userinterfaces;
 
 import net.serenitybdd.screenplay.targets.Target;
+import org.openqa.selenium.By;
 
 public class BookingPage {
     public static final Target DESTINATION_INPUT = Target.the("destination input")
@@ -42,8 +43,8 @@ public class BookingPage {
             .locatedBy("//button[@data-id='price']");
     public static Target FIRST_HOTEL_AVAILABILITY_BUTTON = Target.the("first hotel availability button")
             .locatedBy("(//div[@data-testid='property-card'])[1]//a[@data-testid='availability-cta-btn']");
-
-
+    public static Target RESERVE_BUTTON = Target.the("button reserve")
+            .located(By.id("hp_book_now_button"));
 
 
 

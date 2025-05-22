@@ -71,7 +71,9 @@ public class BookingTask implements Task {
                 Click.on(BookingPage.SORT_DROPDOWN),
                 WaitUntil.the(BookingPage.LOWEST_PRICE_OPTION, isVisible()).forNoMoreThan(10).seconds(),
                 Click.on(BookingPage.LOWEST_PRICE_OPTION),
-                Click.on(BookingPage.FIRST_HOTEL_AVAILABILITY_BUTTON)
+                Click.on(BookingPage.FIRST_HOTEL_AVAILABILITY_BUTTON),
+                SwitchToNewTab.now()
+
 
         //WaitElement.untilAppears(BookingPage.SUGGESTION_OPTION),
                 //Click.on(BookingPage.SUGGESTION_OPTION)
